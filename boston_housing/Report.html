@@ -13880,8 +13880,26 @@ Suppose we are training a SVM and we have two hyper parameters kernel and Gamma.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong>k-fold cross validation is a technique  in which we divide the data into k buckets,and then train our model k times each time using diffrent bucket as our testing set and remaining points as out training set, then we average the results to get the final model.It is recommended to randomize the data in the bucket to get better results.It is more reliable than if we had used only one split.</p>
-<p>The benefits are that we can more reliably estimate model performance of various parameter configurations during grid search (less variance in the estimates). In grid search, there is a danger to overfit to the validation set since we use it many times to evaluate performance of different points on the grid and choose a point that delivered good performance. Hence, with more and more grid points, we are more and more likely to find a point that is good only by chance. With cross validation, the overfitting problem is mitigated since our effective validation set size is larger. This comes at the cost of k-times the computational complexity of a single split.</p>
+<p><strong>Answer: </strong>K-Folds cross-validator provides train/test indices to split data in train/test sets. Split dataset into k consecutive folds (without shuffling by default).
+Each fold is then used once as a validation while the k - 1 remaining folds form the training set.</p>
+<p>Parameters:</p>
+<p>n_splits : int, default=3</p>
+
+<pre><code>Number of folds. Must be at least 2.
+</code></pre>
+<p>shuffle : boolean, optional</p>
+
+<pre><code>Whether to shuffle the data before splitting into batches.
+
+</code></pre>
+<p>random_state : int, RandomState instance or None, optional, default=None</p>
+
+<pre><code>If int, random_state is the seed used by the random number generator; If RandomState  instance, random_state is the random number generator; If None, the random number generator is the RandomState instance used by np.random. Used when shuffle == True.
+
+
+</code></pre>
+<p>GridSearchCV will split whole dataset.Grid search is the process to automate the parameter selection and tuning for best perfomance, When we use k-fold cross validation along with grid search, we consider a wider range of data points to find the tuned parameters thus increasing accuracy and performance of our model.
+The advantage of using more splits is that it matters less how the data gets divided. Every data point gets to be in a test set exactly once, and gets to be in a training set k-1 times. The variance of the resulting estimate is reduced as k is increased.</p>
 
 </div>
 </div>
